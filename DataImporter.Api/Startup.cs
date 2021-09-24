@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataImporter.Core;
+using DataImporter.Core.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +27,8 @@ namespace DataImporter.Api
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllers();
-    }
+      services.AddScoped<IProductService, ProductService>();
+        }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -34,8 +37,9 @@ namespace DataImporter.Api
       {
         app.UseDeveloperExceptionPage();
       }
+            
 
-      app.UseRouting();
+            app.UseRouting();
 
       app.UseAuthorization();
 
